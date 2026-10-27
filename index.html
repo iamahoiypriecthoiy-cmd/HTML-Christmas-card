@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Wishes</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #050505;
+            font-family: Arial, sans-serif;
+            color: white;
+            overflow: hidden;
+            padding: 20px;
+
+        }
+
+        .glass-box {
+            position: relative;
+            width: min(90%, 500px);
+            padding: 40px 30px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid #FFD700;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 0 30px #FFD700;
+            animation: appear 0.8s ease;
+        }
+
+        .glass-box::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            border-radius: 22px;
+            pointer-events: none;
+           
+        }
+
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color:white ;
+            text-shadow: 0 0 30px #FFD700;
+        }
+
+        h2 {
+            font-size: 25px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 25px #00FF00;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.85);
+            text-shadow: 0 0 30px white;
+        }
+
+        button {
+            padding: 12px 30px;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #fafad2;
+            color: black;
+            box-shadow: 0 0 20px #FFD700;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .snow {
+            position: fixed;
+            top: -20px;
+            color: white;
+            font-size: 18px;
+            pointer-events: none;
+            user-select: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0.2;
+            }
+        
+
+        .wish {
+            color: #d8ffe1;
+            text-shadow: 0 0 12px rgba(100, 255, 150, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+  
+  
+    <audio id="bgMusic" autoplay loop>
+        <source src="Elvis_Presle_-_Can_t_Help_Falling_in_Love_(mp3.pm).mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="glass-box" id="welcome">
+        <h1>WELCOME</h1>
+        <h2>Merry Christmas 🎄</h2>
+        <p>กด ENTER เพื่อเปิดดูข้างใน</p>
+        <button onclick="showWish()">ENTER</button>
+    </div>
+
+    
+    <div class="glass-box hidden" id="greeting">
+        <h1 class="wish">Merry Christmas 🎄</h1>
+        <h2>สุขสันต์วันคริสต์มาส</h2>
+        <p>
+            ขอให้เทศกาลคริสต์มาสนี้<br>
+            เต็มไปด้วยความสุขและรอยยิ้ม<br>
+            ขอให้พบเจอแต่สิ่งดี ๆ<br>
+            สมหวังในทุกเรื่องที่ตั้งใจ<br>
+            และมีความสุขตลอดปี 🎁
+        </p>
+        <button onclick="NEXT()">NEXT</button>
+    </div>
+    <div class="glass-box hidden" id="Present">
+        <h1>ของขวัญ กดเลย🎁</h1>
+       
+        <button onclick="OPEN()"> OPEN</button>
+    </div>
+    
+    </div>
+<div class="glass-box hidden" id="void">
+    <p> มันไม่มีอะไรในนี้หรอก ลองเปิดซองดูสิ นั่นแหละของขวัญ<br>🤡</p>
+    
+</div>
+
+    <script>
+        function showWish() {
+            document.getElementById("welcome").classList.add("hidden");
+            document.getElementById("greeting").classList.remove("hidden");
+            
+        }
+
+        function NEXT() {
+            document.getElementById("greeting").classList.add("hidden");
+            document.getElementById("Present").classList.remove("hidden");
+            
+        }
+             function OPEN() {
+            document.getElementById("Present").classList.add("hidden");
+            document.getElementById("void").classList.remove("hidden");
+        
+        }
+        
+         const music = document.getElementById("bgMusic");
+  
+        music.play().catch(() => {
+            document.addEventListener("click", function playMusic() {
+            music.play();
+        }, { once: true });
+  });
+      
+        function createSnow() {
+            const snow = document.createElement("div");
+            snow.className = "snow";
+            snow.textContent = "❄";
+
+            snow.style.left = Math.random() * 100 + "vw";
+            snow.style.opacity = Math.random() * 0.7 + 0.3;
+            snow.style.fontSize = Math.random() * 12 + 10 + "px";
+            snow.style.animationDuration = Math.random() * 5 + 5 + "s";
+
+            document.body.appendChild(snow);
+
+            setTimeout(() => {
+                snow.remove();
+            }, 10000);
+        }
+
+        setInterval(createSnow, 100);
+    </script>
+
+</body>
+</html>
